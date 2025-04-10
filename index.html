@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rompecabezas de Imagen</title>
+    <link rel="stylesheet" type="text/css" href="css/estilos.css" />
+</head>
+<body>
+    <h1>Rompecabezas de Imagen</h1>
+    
+    <div class="controls">
+        <div class="grid-controls">
+            <div>
+                <label for="rows">Filas:</label>
+                <input type="number" id="rows" min="2" max="10" value="3">
+            </div>
+            <div>
+                <label for="columns">Columnas:</label>
+                <input type="number" id="columns" min="2" max="10" value="3">
+            </div>
+            <div>
+                <label for="imageInput" class="file-label">Seleccionar Imagen</label>
+                <input type="file" id="imageInput" class="file-input" accept="image/*">
+            </div>
+        </div>
+    </div>
+    
+    <div class="game-container">
+        <div class="image-preview">
+            <img id="previewImage" src="/api/placeholder/400/300" alt="Imagen predeterminada">
+        </div>
+        
+        <div class="game-controls">
+            <button id="shuffleButton" class="shuffle-button">Desordenar Piezas</button>
+            <div class="timer-display">Tiempo: <span id="timer">00:00:00</span></div>
+        </div>
+        
+        <div id="puzzleContainer" class="puzzle-container"></div>
+        
+        <div id="completeMessage" class="complete-message">
+            ¡Felicidades! Has completado el rompecabezas en <span id="finalTime" class="final-time">00:00:00</span>.
+        </div>
+    </div>
+    <script type="text/javascript" src="js/javascript.js"></script>
+</body>
+</html>
