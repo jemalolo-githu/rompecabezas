@@ -43,6 +43,51 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.readAsDataURL(file);
         }
     });
+
+    
+    // Controlar la carga de la imagen atun
+    btnCargarImg0.addEventListener('click', (e) => { cargarImagenDirecta("img/imagen0.jpg",3,3);    });
+    btnCargarImg1.addEventListener('click', (e) => { cargarImagenDirecta("img/imagen1.jpg",3,3);    });
+    btnCargarImg2.addEventListener('click', (e) => { cargarImagenDirecta("img/imagen2.jpg",3,3);    });
+    btnCargarImg3.addEventListener('click', (e) => { cargarImagenDirecta("img/imagen3.jpg",3,3);    });
+    btnCargarImg4.addEventListener('click', (e) => { cargarImagenDirecta("img/imagen4.jpg",7,10);   });
+
+    function cargarImagenDirecta(imagen,filas,columnas) {
+        const imageInput = document.getElementById('imageInput');
+        // Simular la selección del archivo
+        imagen += `?t=${new Date().getTime()}`
+        fetch(imagen)
+            .then(response => response.blob())
+            .then(blob => {
+                // Crear un objeto File a partir del blob
+                const file = new File([blob], 'imagen1.jpg', { type: blob.type });
+                
+                // Crear un FileList simulado
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                
+                // Asignar el archivo al input
+                imageInput.files = dataTransfer.files;
+                
+                // Disparar el evento change para que se procese como si fuera seleccionado manualmente
+                const changeEvent = new Event('change', { bubbles: true });
+                imageInput.dispatchEvent(changeEvent);
+            })
+            .catch(error => {
+                console.error('Error al cargar la imagen:', error);
+            });
+
+
+            document.getElementById("rows").value=filas;
+            document.getElementById("columns").value=columnas;
+            const rowsInput=document.getElementById("rows").value;
+            const columnsInput = document.getElementById("columns").value;
+        
+            resetTimer();
+           
+            
+    }   
+    
     
     // Configurar el rompecabezas con la configuración actual
     function setupPuzzle() {
@@ -225,6 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function padZero(num) {
         return num.toString().padStart(2, '0');
     }
+
     
     // Inicializar la aplicación
     init();
